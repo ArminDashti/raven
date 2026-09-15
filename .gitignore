@@ -1,0 +1,9 @@
+api/tmp/
+api/data/
+webui/node_modules/
+webui/dist/
+webui/.armin/
+*.db
+*.sqlite
+*.exe
+.DS_Store

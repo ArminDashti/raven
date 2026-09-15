@@ -1,0 +1,59 @@
+name: bugs-local
+
+services:
+  api:
+    image: golang:1.23-alpine
+    restart: "no"
+    working_dir: /app
+    environment:
+      GIN_MODE: release
+      ADDR: ":8080"
+      DATABASE_PATH: /app/data/bug-report.db
+      UPLOAD_DIR: /app/data/uploads
+      JWT_SECRET: raven-local-dev-change-me
+      PUBLIC_BASE_URL: https://pc-armin:8443/bugs
+      VAPID_SUBJECT: mailto:bugs@raven.local
+      VAPID_PUBLIC_KEY: REPLACE_WITH_GENERATED_VAPID_PUBLIC_KEY
+      VAPID_PRIVATE_KEY: REPLACE_WITH_GENERATED_VAPID_PRIVATE_KEY
+    command:
+      - sh
+      - -c
+      - apk add --no-cache git gcc musl-dev && go install github.com/air-verse/air@v1.61.7 && mkdir -p /app/data /app/data/uploads /app/tmp && air -c .air.toml
+    volumes:
+      - ./api:/app
+      - bugs-gomod:/go/pkg/mod
+      - bugs-gotmp:/app/tmp
+      - bugs-sqlite-data:/app/data
+    networks:
+      - pc-armin-local
+
+  webui:
+    image: node:22-alpine
+    restart: "no"
+    working_dir: /app
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
+      WATCHPACK_POLLING: "true"
+      VITE_API_PROXY: http://api:8080
+    command:
+      - sh
+      - -c
+      - npm install && npm run dev -- --host 0.0.0.0 --port 5173 --strictPort
+    volumes:
+      - ./webui:/app
+      - bugs-webui-node-modules:/app/node_modules
+    depends_on:
+      - api
+    networks:
+      - pc-armin-local
+
+networks:
+  pc-armin-local:
+    name: pc-armin-local
+    external: true
+
+volumes:
+  bugs-gomod:
+  bugs-gotmp:
+  bugs-sqlite-data:
+  bugs-webui-node-modules:

@@ -1,0 +1,136 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --background: 210 20% 98%;
+  --foreground: 222 28% 14%;
+  --card: 0 0% 100%;
+  --card-foreground: 222 28% 14%;
+  --primary: 222 47% 11%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 210 16% 93%;
+  --secondary-foreground: 222 28% 14%;
+  --muted: 210 16% 94%;
+  --muted-foreground: 215 14% 40%;
+  --accent: 210 16% 92%;
+  --accent-foreground: 222 28% 14%;
+  --destructive: 0 72% 45%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 214 18% 82%;
+  --input: 214 18% 82%;
+  --ring: 216 34% 48%;
+  --radius: 0.25rem;
+  --panel: 0 0% 100%;
+  --panel-border: 214 18% 86%;
+}
+
+/* JetBrains Darcula (Anan.jetbrains-darcula-theme) */
+.dark {
+  color-scheme: dark;
+  --background: 0 0% 16.9%; /* #2B2B2B */
+  --foreground: 0 0% 100%; /* #FFFFFF */
+  --card: 210 4% 24.5%; /* #3C3F41 */
+  --card-foreground: 0 0% 100%;
+  --primary: 211 41% 36%; /* #365880 */
+  --primary-foreground: 0 0% 100%;
+  --secondary: 192 4% 28%; /* #45494A */
+  --secondary-foreground: 0 0% 100%;
+  --muted: 0 0% 19.6%; /* #323232 */
+  --muted-foreground: 0 0% 100%;
+  --accent: 210 3% 31%; /* #4C5052 */
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 65% 48%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 0 0% 26%; /* #424242 */
+  --input: 192 4% 28%; /* #45494A */
+  --ring: 207 54% 54%; /* #4A88C7 */
+  --radius: 0.25rem;
+  --panel: 210 4% 24.5%;
+  --panel-border: 0 0% 30%;
+}
+
+* {
+  @apply border-border;
+}
+
+body {
+  @apply bg-background text-foreground;
+  -webkit-font-smoothing: auto;
+  -moz-osx-font-smoothing: auto;
+  text-rendering: geometricPrecision;
+}
+
+.font-raven-brand {
+  font-family: 'Share Tech Mono', ui-monospace, monospace;
+  letter-spacing: 0.08em;
+}
+
+.dark body,
+html.dark body {
+  color: #fff;
+}
+
+/* Dark theme: keep type white (status chips, links, accent numbers) */
+html.dark,
+html.dark body {
+  color: #fff;
+}
+
+html.dark .text-muted-foreground,
+html.dark .text-primary,
+html.dark .text-amber-300,
+html.dark .text-sky-300,
+html.dark .text-violet-300,
+html.dark .text-emerald-300,
+html.dark .text-emerald-400,
+html.dark .text-rose-300,
+html.dark .text-rose-400,
+html.dark .text-slate-300,
+html.dark .text-indigo-300,
+html.dark .text-amber-700,
+html.dark .text-sky-700,
+html.dark .text-emerald-700,
+html.dark .text-rose-500 {
+  color: #fff !important;
+}
+
+/* Native <select> lists inherit page text color but keep a light OS popup without this */
+select {
+  @apply bg-background text-foreground;
+}
+
+select option {
+  background-color: hsl(var(--card));
+  color: hsl(var(--foreground));
+}
+
+@layer components {
+  /* Rounded bordered panel — matches settings-row “Runtime / Placement” style */
+  .field-panel {
+    @apply rounded-sm border px-4 py-3.5;
+    background-color: hsl(var(--panel));
+    border-color: hsl(var(--panel-border));
+  }
+
+  .field-panel-row {
+    @apply field-panel flex items-center justify-between gap-4;
+  }
+
+  .field-panel-row .field-panel-label {
+    @apply shrink-0 text-sm font-medium text-foreground;
+  }
+
+  .field-panel-row .field-panel-value {
+    @apply min-w-0 text-sm text-muted-foreground text-right;
+  }
+
+  .field-panel-stack {
+    @apply field-panel space-y-2;
+  }
+
+  .field-panel-stack .field-panel-label {
+    @apply text-sm font-medium text-foreground;
+  }
+}
