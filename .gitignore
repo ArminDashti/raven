@@ -7,3 +7,5 @@ webui/.armin/
 *.sqlite
 *.exe
 .DS_Store
+
+# --- commit-push-to-github large files ---
