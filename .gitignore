@@ -9,3 +9,5 @@ webui/.armin/
 .DS_Store
 
 # --- commit-push-to-github large files ---
+
+# commit-push-to-github: large files (>5MB) auto-ignored
