@@ -1,8 +1,14 @@
 ---
-description: After every task in raven, rebuild and update the local Raven Docker stack so the latest changes are live
+description: >-
+  After every task in raven, rebuild and update the local Raven Docker stack so the latest changes are live
 alwaysApply: true
+metadata:
+  version: 1.0.0
+  author: "Armin Dashti"
+  tags: []
+  last_updated: "2026-10-08 22:11:19"
+  uuid: 2d6ef182-23c9-4e28-a286-4d99182ad084
 ---
-
 # Rebuild and update after every task
 
 When you finish any task that changes code, config or anything else the running app uses, rebuild and update the local install before you report back. Run commands from the repo root.
